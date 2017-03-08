@@ -1,0 +1,26 @@
+- name: HOST PREPARATION
+  hosts: localhost
+  connection: local
+  become_user: root
+
+  tasks:
+    - name: Generating temporary SSH key
+      shell: ssh-keygen -b 4096 -t rsa -f /root/.ssh/id_rsa -q -N "" -C "Ansible@docker"
+      args:
+        creates: /root/.ssh/id_rsa
+
+    - name: Adding generated SSH key to the Hosts 'authorized_key' file
+      lineinfile: dest=/rootfs/root/.ssh/authorized_keys state=present regexp='.*Ansible@docker' line=\"{{ lookup('file', '/root/.ssh/id_rsa.pub') }}\"
+
+- name: NTP INSTALLATION
+  hosts: all
+  roles:
+    - ansible-role-ntp
+  become_user: root
+
+- name: CLEANING UP THE HOST
+  hosts: all
+  become_user: root
+  tasks:
+    - name: Removing generated SSH key from the Hosts 'authorized_key' file
+      lineinfile: dest=/root/.ssh/authorized_keys state=absent regexp='.*Ansible@docker'
