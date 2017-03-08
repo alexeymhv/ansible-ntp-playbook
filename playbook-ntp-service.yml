@@ -5,6 +5,13 @@
     - ansible-role-host-preparation
   become_user: root
 
+- name: ADDITIONAL HOST PREPARATION
+  hosts: all
+  user: ec2-user
+  tasks:
+    - name: Restarting sshd
+      shell: sudo /etc/init.d/sshd restart
+
 - name: NTP INSTALLATION
   hosts: all
   roles:
