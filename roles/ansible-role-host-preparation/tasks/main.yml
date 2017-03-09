@@ -18,9 +18,9 @@
     regexp: '.*Ansible@docker'
     line: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
   
-  - name: Enabling ssh login for root user
-    replace: dest=/rootfs/etc/ssh/sshd_config regexp='#PermitRootLogin yes' replace='PermitRootLogin yes'
-    when: sshd_enabled.rc == 0 and "{{IS_AMAZON_LINUX}}"
+- name: Enabling ssh login for root user
+  replace: dest=/rootfs/etc/ssh/sshd_config regexp='#PermitRootLogin yes' replace='PermitRootLogin yes'
+  when: sshd_enabled.rc == 0 and "{{IS_AMAZON_LINUX}}"
 
 - block:
     - name: Generating temporary SSH key for the home user
