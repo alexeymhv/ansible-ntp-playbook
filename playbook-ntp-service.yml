@@ -11,7 +11,7 @@
   tasks:
     - name: Restarting sshd
       shell: sudo /etc/init.d/sshd restart
-  when: "{{ IS_AMAZON_LINUX }}"
+      when: "{{ IS_AMAZON_LINUX }}"
 
 - name: NTP INSTALLATION
   hosts: all
@@ -33,7 +33,7 @@
   tasks:
     - name: Restarting sshd
       shell: sudo /etc/init.d/sshd restart
-  when: "{{ IS_AMAZON_LINUX }}"
+      when: "{{ IS_AMAZON_LINUX }}"
 
 - name: REMOVING EC2-USER KEY (for Amazon Linux)
   hosts: localhost
@@ -42,4 +42,4 @@
   tasks:
     - name: Removing generated SSH key from the ec2-user Hosts 'authorized_key' file
       lineinfile: dest=/rootfs/home/ec2-user/.ssh/authorized_keys state=absent regexp='.*Ansible@docker'
-  when: "{{IS_AMAZON_LINUX}}"
+      when: "{{IS_AMAZON_LINUX}}"
