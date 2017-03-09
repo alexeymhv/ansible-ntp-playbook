@@ -1,3 +1,0 @@
----
-- name: restart sshd
-  shell: sudo /etc/init.d/sshd restart
