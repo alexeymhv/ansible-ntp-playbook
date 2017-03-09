@@ -6,6 +6,8 @@ This playbook installs NTP service on the host.
 
 - <FULL_PATH_TO_PLAYBOOK> - The full path to the playbook on your host.
 - <NTP_AREA> - The area to use the NTP servers from. Available values:
+- <HOST_USER> - The non-root user of the host.
+
 ```
 europe
 asia

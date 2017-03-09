@@ -9,7 +9,8 @@
   hosts: all
   roles:
     - ansible-role-ntp
-  user: "{{ host_user }}"
+  user: "{{ HOST_USER }}"
+  become: true
   become_user: root
 
 - name: CLEANING UP THE HOST
@@ -18,4 +19,4 @@
   become_user: root
   tasks:
     - name: Removing generated SSH key from the Hosts 'authorized_key' file
-      lineinfile: dest=/rootfs/home/{{ host_user }}/.ssh/authorized_keys state=absent regexp='.*Ansible@docker'
+      lineinfile: dest=/rootfs/home/{{ HOST_USER }}/.ssh/authorized_keys state=absent regexp='.*Ansible@docker'

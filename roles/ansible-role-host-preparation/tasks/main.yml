@@ -6,7 +6,7 @@
 
 - name: Adding generated SSH key to the Hosts user 'authorized_key' file
   lineinfile:
-    dest: /rootfs/home/{{ host_user }}/.ssh/authorized_keys
+    dest: /rootfs/home/{{ HOST_USER }}/.ssh/authorized_keys
     state: present
     regexp: '.*Ansible@docker'
     line: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
